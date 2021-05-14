@@ -1,5 +1,5 @@
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "cpputils/graphics/image_event.h"
 #include "opponent.h"
@@ -16,7 +16,9 @@ class Game : public graphics::AnimationEventListener,
   std::vector<std::unique_ptr<OpponentProjectile>> &GetOpponentProjectiles() {
     return oprojectiles;
   }
-  std::vector<std::unique_ptr<PlayerProjectile>> &GetPlayerProjectiles() { return pprojectiles; }
+  std::vector<std::unique_ptr<PlayerProjectile>> &GetPlayerProjectiles() {
+    return pprojectiles;
+  }
   Player &GetPlayer() { return daplaya; }
   int GetScore() { return score_; }
   bool HasLost() { return lost_; }

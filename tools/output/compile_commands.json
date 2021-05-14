@@ -1,0 +1,27 @@
+[
+ {
+ "directory" : "/home/onclass/siligame-05-onclass-csuf",
+ "command" : "clang++ -std=c++17 main.cc -o main",
+ "file" : "/home/onclass/siligame-05-onclass-csuf/main.cc"
+ },
+ {
+ "directory" : "/home/onclass/siligame-05-onclass-csuf",
+ "command" : "clang++ -std=c++17 player.cc -o main",
+ "file" : "/home/onclass/siligame-05-onclass-csuf/player.cc"
+ },
+ {
+ "directory" : "/home/onclass/siligame-05-onclass-csuf",
+ "command" : "clang++ -std=c++17 opponent.cc -o main",
+ "file" : "/home/onclass/siligame-05-onclass-csuf/opponent.cc"
+ },
+ {
+ "directory" : "/home/onclass/siligame-05-onclass-csuf",
+ "command" : "clang++ -std=c++17 game_element.cc -o main",
+ "file" : "/home/onclass/siligame-05-onclass-csuf/game_element.cc"
+ },
+ {
+ "directory" : "/home/onclass/siligame-05-onclass-csuf",
+ "command" : "clang++ -std=c++17 game.cc -o main",
+ "file" : "/home/onclass/siligame-05-onclass-csuf/game.cc"
+ },
+]

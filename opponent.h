@@ -1,7 +1,7 @@
+#include <memory>
+
 #include "cpputils/graphics/image.h"
 #include "game_element.h"
-
-#include <memory>
 
 #ifndef OPPONENT
 #define OPPONENT
