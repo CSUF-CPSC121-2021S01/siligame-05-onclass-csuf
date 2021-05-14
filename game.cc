@@ -17,10 +17,10 @@ void Game::Init() {
   screen.AddAnimationEventListener(*this);
 }
 
-void LaunchProjectiles() {
+void Game::LaunchProjectiles() {
   for (int i = 0; i < opponents.size(); i++) {
     if (opponents[i]->LaunchProjectile() != nullptr) {
-      opponents.push_back(std::move(opponents[i]->LaunchProjectile()));
+      oprojectiles.push_back(std::move(opponents[i]->LaunchProjectile()));
     }
   }
 }
@@ -53,6 +53,27 @@ void Game::UpdateScreen() {
 
 }
 
+void Game::RemoveInactive() {
+  for (int i = 0; i < opponents.size(); i++) {
+    if (!opponents[i]->GetIsActive()) {
+      opponents.erase(opponents.begin()+i);
+      break;
+    }
+  }
+  for (int i = 0; i < oprojectiles.size(); i++) {
+    if (!oprojectiles[i]->GetIsActive()) {
+      oprojectiles.erase(oprojectiles.begin()+i);
+      break;
+    }
+  }
+  for (int i = 0; i < pprojectiles.size(); i++) {
+    if (!pprojectiles[i]->GetIsActive()) {
+      pprojectiles.erase(pprojectiles.begin()+i);
+      break;
+    }
+  }
+}
+
 void Game::Start(graphics::Image &screen) { screen.ShowUntilClosed(); }
 
 void Game::MoveGameElements() {
@@ -72,12 +93,14 @@ void Game::FilterIntersections() {
     if (daplaya.IntersectsWith(opponents[i].get())) {
       daplaya.SetIsActive(false);
       opponents[i]->SetIsActive(false);
+      lost_ = true;
     }
   }
   for (int i = 0; i < oprojectiles.size(); i++) {
-    if (oprojectiles[i]->IntersectsWith(daplaya)) {
+    if (oprojectiles[i]->IntersectsWith(&daplaya)) {
       daplaya.SetIsActive(false);
       oprojectiles[i]->SetIsActive(false);
+      lost_ = true;
     }
   }
   for (int i = 0; i < pprojectiles.size(); i++) {
@@ -94,8 +117,13 @@ void Game::FilterIntersections() {
 }
 
 void Game::OnAnimationStep() {
+  if(opponents.size() == 0) {
+    CreateOpponents();
+  }
   MoveGameElements();
+  LaunchProjectiles();
   FilterIntersections();
+  RemoveInactive();
   UpdateScreen();
   screen.Flush();
 }
@@ -106,5 +134,6 @@ void Game::OnMouseEvent(const graphics::MouseEvent &event) {
       event.GetX() < screen.GetWidth() && event.GetY() < screen.GetHeight()) {
     daplaya.SetX(event.GetX() - daplaya.GetWidth() / 2);
     daplaya.SetY(event.GetY() - daplaya.GetHeight() / 2);
+    pprojectiles.push_back(std::make_unique<PlayerProjectile>(daplaya.GetX() + 25, daplaya.GetY()));
   }
 }

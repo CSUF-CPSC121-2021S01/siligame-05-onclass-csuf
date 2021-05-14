@@ -25,6 +25,7 @@ class Game : public graphics::AnimationEventListener,
   void CreateOpponentProjectiles();
   void CreatePlayerProjectiles();
   void LaunchProjectiles();
+  void RemoveInactive();
   void Init();
   void UpdateScreen();
   void Start(graphics::Image &screen);
