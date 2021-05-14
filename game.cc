@@ -54,22 +54,19 @@ void Game::UpdateScreen() {
 }
 
 void Game::RemoveInactive() {
-  for (int i = 0; i < opponents.size(); i++) {
+  for (int i = opponents.size() - 1; i >= 0; i--) {
     if (!opponents[i]->GetIsActive()) {
       opponents.erase(opponents.begin()+i);
-      break;
     }
   }
-  for (int i = 0; i < oprojectiles.size(); i++) {
+  for (int i = oprojectiles.size() - 1; i >= 0; i--) {
     if (!oprojectiles[i]->GetIsActive()) {
       oprojectiles.erase(oprojectiles.begin()+i);
-      break;
     }
   }
-  for (int i = 0; i < pprojectiles.size(); i++) {
+  for (int i = pprojectiles.size() - 1; i >= 0; i--) {
     if (!pprojectiles[i]->GetIsActive()) {
       pprojectiles.erase(pprojectiles.begin()+i);
-      break;
     }
   }
 }
